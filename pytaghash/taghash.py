@@ -49,7 +49,7 @@ class TagHash(bs4.Tag):
         :param tag: BS4 Tag
         :return: string: name.00
         """
-        return '{}.{}'.format(self.name, ''.join(['1' if x else '0' for x in (
+        return '{0}.{1}'.format(self.name, ''.join(['1' if x else '0' for x in (
             self.get('id'), self.get('name')
         )]))
 
@@ -96,8 +96,8 @@ class TagHash(bs4.Tag):
                 type(tag) == bs4.Tag and tag.name not in LIST_TAGS
             ])
             parts = []
-            parts.append('{}'.format(' and '.join(
-                ['count({})={}'.format(tag_name, number) for tag_name, number in sorted(children.items())]
+            parts.append('{0}'.format(' and '.join(
+                ['count({0})={1}'.format(tag_name, number) for tag_name, number in sorted(children.items())]
             )))
             recurse_children = [tag._recursive_structure_xpath(depth, level + 1) for tag in self.children if
                                 type(tag) == bs4.Tag and tag.name not in LIST_TAGS]
@@ -106,12 +106,12 @@ class TagHash(bs4.Tag):
             ))
             children_xpath = ' and '.join([part for part in parts if part])
             if children_xpath:
-                children_xpath = '[ {} ]'.format(children_xpath)
+                children_xpath = '[ {0} ]'.format(children_xpath)
         else:
             children_xpath = ''
 
         if children_xpath:
-            return '{} {}'.format(self.name, children_xpath)
+            return '{0} {1}'.format(self.name, children_xpath)
         else:
             return ''
 
@@ -136,23 +136,23 @@ class TagHash(bs4.Tag):
                 if sibling == self:
                     index = i
                     break
-            return '{}[{}]'.format(self.name, index + 1)
+            return '{0}[{1}]'.format(self.name, index + 1)
         else:
-            return '{}[1]'.format(self.name)
+            return '{0}[1]'.format(self.name)
 
     def _identifying_xpath(self):
         tag = self
         path_components = []
         while True:
             if tag.get('id'):
-                path = '{}[@id="{}"]'.format(tag.name, tag.get('id'))
+                path = '{0}[@id="{1}"]'.format(tag.name, tag.get('id'))
                 path_components.append(path)
                 break
             elif tag.get('class'):
                 class_paths = []
                 for cls in tag.get('class'):
-                    class_paths.append('contains(@class, "{}")'.format(cls))
-                path = '{}[{}]'.format(tag.name, ' and '.join(class_paths))
+                    class_paths.append('contains(@class, "{0}")'.format(cls))
+                path = '{0}[{1}]'.format(tag.name, ' and '.join(class_paths))
                 path_components.append(path)
                 break
             else:
@@ -160,7 +160,7 @@ class TagHash(bs4.Tag):
                     path_components.append(tag._tag_sibling_position())
                     tag = tag.parent
                 else:
-                    path_components.append('{}'.format(tag.name))
+                    path_components.append('{0}'.format(tag.name))
                     break
 
         xpath = '//' + '/'.join(reversed(path_components))
@@ -177,7 +177,7 @@ class TagHash(bs4.Tag):
                     path_components.append(tag._tag_sibling_position())
                     tag = tag.parent
                 else:
-                    path_components.append('{}'.format(tag.name))
+                    path_components.append('{0}'.format(tag.name))
                     break
 
         xpath = '/'.join(reversed(path_components))
