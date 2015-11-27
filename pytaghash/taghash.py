@@ -9,6 +9,8 @@ import bs4
 import datadiff
 import lxml.html
 import regex
+import six
+
 
 INNER_TEXT_TAGS = ['b', 'i', 'u', 'strong', 'br', 'p', 'code', 'big', 'small']
 LIST_TAGS = ['ul', 'ol', 'table']
@@ -346,26 +348,31 @@ def list_difference(a, b):
             diff.append(x)
     return diff
 
+
 def patch():
-    # patch bs4.Tag
-    bs4.Tag._feature_hash = TagHash._feature_hash
-    bs4.Tag._tag_hash = TagHash._tag_hash
-    bs4.Tag.hash = TagHash._hash
-    bs4.Tag.hash_compare = TagHash._tag_hash_compare
+    """
+    Patch `bs4.Tag` to include new functionality.
 
-    bs4.Tag._recursive_structure_xpath = TagHash._recursive_structure_xpath
-    bs4.Tag.structure_xpath = TagHash._structure_xpath
+    :return:
+    """
+    bs4.Tag._feature_hash = six.get_unbound_function(TagHash._feature_hash)
+    bs4.Tag._tag_hash = six.get_unbound_function(TagHash._tag_hash)
+    bs4.Tag.hash = six.get_unbound_function(TagHash._hash)
+    bs4.Tag.hash_compare = six.get_unbound_function(TagHash._tag_hash_compare)
 
-    bs4.Tag._tag_sibling_position = TagHash._tag_sibling_position
-    bs4.Tag.identifying_xpath = TagHash._identifying_xpath
-    bs4.Tag.relative_xpath = TagHash._relative_xpath
+    bs4.Tag._recursive_structure_xpath = six.get_unbound_function(TagHash._recursive_structure_xpath)
+    bs4.Tag.structure_xpath = six.get_unbound_function(TagHash._structure_xpath)
 
-    bs4.Tag._recursive_count = TagHash._recursive_count
-    bs4.Tag.count = TagHash._count
+    bs4.Tag._tag_sibling_position = six.get_unbound_function(TagHash._tag_sibling_position)
+    bs4.Tag.identifying_xpath = six.get_unbound_function(TagHash._identifying_xpath)
+    bs4.Tag.relative_xpath = six.get_unbound_function(TagHash._relative_xpath)
 
-    bs4.Tag.lxml = TagHash._lxml
-    bs4.Tag.iterate = TagHash._iterate
-    bs4.Tag.inner_text = TagHash._inner_text
-    bs4.Tag.level = TagHash._level
-    bs4.Tag.is_list = TagHash._is_list
-    bs4.Tag.has_identical_parent = TagHash._has_identical_parent
+    bs4.Tag._recursive_count = six.get_unbound_function(TagHash._recursive_count)
+    bs4.Tag.count = six.get_unbound_function(TagHash._count)
+
+    bs4.Tag.lxml = six.get_unbound_function(TagHash._lxml)
+    bs4.Tag.iterate = six.get_unbound_function(TagHash._iterate)
+    bs4.Tag.inner_text = six.get_unbound_function(TagHash._inner_text)
+    bs4.Tag.level = six.get_unbound_function(TagHash._level)
+    bs4.Tag.is_list = six.get_unbound_function(TagHash._is_list)
+    bs4.Tag.has_identical_parent = six.get_unbound_function(TagHash._has_identical_parent)

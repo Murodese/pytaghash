@@ -4,3 +4,4 @@ datadiff
 regex
 codecov
 backports.statistics
+six
