@@ -370,9 +370,9 @@ def patch():
     bs4.Tag._recursive_count = six.get_unbound_function(TagHash._recursive_count)
     bs4.Tag.count = six.get_unbound_function(TagHash._count)
 
-    bs4.Tag.lxml = six.get_unbound_function(TagHash._lxml)
+    bs4.Tag.lxml = TagHash._lxml
     bs4.Tag.iterate = six.get_unbound_function(TagHash._iterate)
-    bs4.Tag.inner_text = six.get_unbound_function(TagHash._inner_text)
-    bs4.Tag.level = six.get_unbound_function(TagHash._level)
+    bs4.Tag.inner_text = TagHash._inner_text
+    bs4.Tag.level = TagHash._level
     bs4.Tag.is_list = six.get_unbound_function(TagHash._is_list)
     bs4.Tag.has_identical_parent = six.get_unbound_function(TagHash._has_identical_parent)
