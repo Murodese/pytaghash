@@ -3,3 +3,4 @@ beautifulsoup4
 datadiff
 regex
 coverage
+codecov
