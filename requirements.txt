@@ -4,3 +4,4 @@ datadiff
 regex
 coverage
 codecov
+backports.statistics

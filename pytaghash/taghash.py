@@ -1,6 +1,9 @@
 import collections
 import json
-import statistics
+try:
+    import statistics
+except ImportError:
+    import backports.statistics as statistics
 
 import bs4
 import datadiff
