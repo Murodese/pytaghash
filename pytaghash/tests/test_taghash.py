@@ -1,15 +1,11 @@
 import pytaghash.taghash
+pytaghash.taghash.patch()
 
 from .fixtures.tags import *
 from .fixtures import abc_drum
 
 
 class TestTagHash:
-    @classmethod
-    def setup_class(self):
-        # patch bs4.Tag
-        pytaghash.taghash.patch()
-
     def test_hash(self):
         hash = complex1.hash(depth=1)
         assert hash == {
