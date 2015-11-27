@@ -1,4 +1,5 @@
-# yes, i know this isn't valid html and i don't care
+# -*- coding: utf-8 -*-
+
 short_comment_list = '''
 <ul>
     <li>

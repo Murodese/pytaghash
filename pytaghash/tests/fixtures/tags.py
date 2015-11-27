@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import bs4
 
 complex1 = bs4.BeautifulSoup('''
