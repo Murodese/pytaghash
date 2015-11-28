@@ -1,7 +1,12 @@
 from __future__ import division
 
-import collections
+try:
+    from collections import Counter
+except ImportError:
+    from backport_collections import Counter
+
 import json
+
 try:
     import statistics
 except ImportError:
@@ -93,7 +98,7 @@ class TagHash(bs4.Tag):
 
     def _recursive_structure_xpath(self, depth, level=0):
         if self.children and not level == depth:
-            children = collections.Counter([
+            children = Counter([
                 tag.name for tag in self.children if
                 type(tag) == bs4.Tag and tag.name not in LIST_TAGS
             ])
@@ -341,7 +346,7 @@ class TagHash(bs4.Tag):
 
 
 def list_difference(a, b):
-    count = collections.Counter(a)  # count items in a
+    count = Counter(a)  # count items in a
     count.subtract(b)  # subtract items that are in b
     diff = []
     for x in a:
