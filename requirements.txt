@@ -6,3 +6,5 @@ codecov
 backports.statistics
 six
 backport_collections
+coverage
+pytest-cov
