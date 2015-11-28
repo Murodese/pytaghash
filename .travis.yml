@@ -9,9 +9,10 @@ python:
 install:
   - pip install .
   - pip install -r requirements.txt
-script: py.test
+script:
+  - py.test
 after_success:
-  codecov
+  - codecov
 before_cache:
   - rm -rf $HOME/.cache/pip/log
 cache:
