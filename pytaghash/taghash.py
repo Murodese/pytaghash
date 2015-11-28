@@ -1,3 +1,5 @@
+from __future__ import division
+
 import collections
 import json
 try:
@@ -30,10 +32,10 @@ class TagHash(bs4.Tag):
     def _hash(self, depth):
         # cache the hash depth and string
         if not self._hash_depth or self._hash_depth != depth:
-            self._hash = self._tag_hash(depth)
-            self._hash_string = json.dumps(self._hash)
+            self._hash_dict = self._tag_hash(depth)
+            self._hash_string = json.dumps(self._hash_dict)
             self._hash_depth = depth
-        return self._hash
+        return self._hash_dict
 
     def _tag_hash(self, depth, level=0):
         if self.children and not level == depth and self.name not in LIST_TAGS:
@@ -86,7 +88,7 @@ class TagHash(bs4.Tag):
                     # modification, only half a point since it does it twice
                     score += 0.5 * len(FEATURE_REGEX.findall(line))
 
-        res = 1 - (score / total)
+        res = 1 - score / total
         return res >= TREE_SIMILARITY_THRESHOLD
 
     def _recursive_structure_xpath(self, depth, level=0):

@@ -153,7 +153,7 @@ nested_comments_abc = bs4.BeautifulSoup('''
         <p><span><a class="popup" href="http://www2b.abc.net.au/tmb/View/NewMessage.aspx?b=69&amp;t=12532&amp;tn=&amp;dm=1&amp;m=1548785&amp;tpa=&amp;r=%2ftmb%2fView%2fMessage.aspx%3fb%3d69%26t%3d12532%26a%3d0%26ps%3d50%26tpa%3d%26uto%3d1%26dm%3d4%26ci%3d0%26pd%3d1%26so%3dDateTime%26soa%3dTrue%26p%3d1%26p2%3d0">Reply</a></span> <span><a class="popup" href="http://www2b.abc.net.au/tmb/View/AlertModerator.aspx?b=69&amp;m=1548785&amp;tpa=&amp;r=%2ftmb%2fView%2fMessage.aspx%3fb%3d69%26t%3d12532%26a%3d0%26ps%3d50%26tpa%3d%26uto%3d1%26dm%3d4%26ci%3d0%26pd%3d1%26so%3dDateTime%26soa%3dTrue%26p%3d1%26p2%3d0">Alert moderator</a></span></p>
     </li>
 </ul>
-''')
+''', 'lxml')
 
 nested_comments_kotaku = bs4.BeautifulSoup('''
 <div class="post-meta" id="comments">
@@ -1174,7 +1174,7 @@ nested_comments_kotaku = bs4.BeautifulSoup('''
         </form>
     </div>
 </div>
-''')
+''', 'lxml')
 
 nested_comments_disqus = bs4.BeautifulSoup('''
 <div id="posts">
@@ -5764,4 +5764,4 @@ nested_comments_disqus = bs4.BeautifulSoup('''
         <a class="btn" data-action="more-posts" href="#">Load more comments</a>
     </div>
 </div>
-''')
+''', 'lxml')
